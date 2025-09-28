@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calcolatore Rata Mutuo 🏡</title>
-<meta name="description" content="Calcola facilmente la rata mensile del tuo mutuo e scopri quanto pagherai in totale e in interessi.">
+<title>Calcolatore Rata Mutuo Online 🏡</title>
+<meta name="description" content="Calcola facilmente la rata mensile del tuo mutuo, totale pagato alla banca e interessi. Strumento gratuito, veloce e preciso.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.css"/>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
@@ -33,7 +33,8 @@ body {
   top:-25px;
   left:calc(50% - 25px);
 }
-h1 { margin-bottom:25px; color:#00796b; text-align:center; }
+h1 { margin-bottom:15px; color:#00796b; text-align:center; }
+p { margin-bottom:15px; color:#004d40; line-height:1.5; }
 label { display:block; margin-top:15px; font-weight:bold; color:#004d40; }
 input { width:100%; padding:10px; margin-top:5px; border-radius:8px; border:1px solid #b2dfdb; font-size:16px; }
 button { margin-top:25px; width:100%; padding:12px; font-size:16px; border:none; border-radius:8px; background-color:#00796b; color:white; cursor:pointer; transition:0.3s; }
@@ -50,6 +51,19 @@ canvas { margin-top:20px; }
 
 <div class="container">
   <h1>Calcolatore Rata Mutuo</h1>
+
+  <!-- Testi informativi e SEO -->
+  <p>
+  Benvenuto nel tuo calcolatore di rata mutuo online! Con questo strumento gratuito puoi facilmente calcolare la rata mensile del tuo mutuo in base a importo, tasso e durata.
+  </p>
+
+  <p>
+  Oltre a fornire la rata, il nostro calcolatore ti mostra anche il totale pagato alla banca e gli interessi complessivi. Potrai capire quanto il mutuo incide sul tuo stipendio netto e ricevere consigli sulla sostenibilità della rata.
+  </p>
+
+  <p>
+  Se stai cercando informazioni su mutui, tassi d’interesse e consigli pratici per gestire il tuo budget, sei nel posto giusto. Il nostro strumento è semplice, veloce e preciso.
+  </p>
 
   <label>Importo del mutuo (€):</label>
   <input type="number" id="capitale" placeholder="Es. 100000" />
@@ -96,7 +110,6 @@ function calcolaRata() {
   const totalePagato = rata*numeroRate;
   const interessiPagati = totalePagato-capitale;
 
-  // Mostra risultati principali e consiglio
   const percentualeReddito = (rata/stipendio)*100;
   let consiglio = "";
   if(percentualeReddito > 35){
@@ -115,7 +128,6 @@ function calcolaRata() {
   ${consiglio}
   `;
 
-  // Grafico capitale vs interessi
   const ctx = document.getElementById('grafico').getContext('2d');
   if(window.myChart) window.myChart.destroy();
   window.myChart = new Chart(ctx,{
@@ -130,7 +142,6 @@ function calcolaRata() {
     options:{plugins:{legend:{position:'bottom'}}}
   });
 
-  // Tabella ammortamento per anno
   let tabellaHTML = `<table><tr><th>Anno</th><th>Interessi (€)</th><th>Capitale (€)</th><th>Totale pagato (€)</th></tr>`;
   let saldo = capitale;
   for(let a=1;a<=anni;a++){
